@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "condor"
+version = "0.1.0"
+description = ""
+authors = ["Rodrigo Perez Dattari <r.j.perezdattari@tudelft.nl>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+scipy = "^1.6"
+numpy = "^1.19"
+pickle4 = "^0.0.1"
+matplotlib = "^3.5.2"
+torch = "^1.11.0"
+tensorboard = "==2.5.0"
+simple-parsing = "^0.0.19"
+optuna = "^2.10.0"
+similaritymeasures = "^0.4.4"
+torchvision = "^0.12.0"
+protobuf = "3.20.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
