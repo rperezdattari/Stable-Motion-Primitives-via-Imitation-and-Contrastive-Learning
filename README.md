@@ -15,7 +15,7 @@ The current version of the paper can be cited using the following reference:
 ```
 ## Teaser: executing learned motion for multiple initial conditions
 <p align="center">
-    <img src="./media/s_shape_animation.gif" width="25%" height="25%"/>
+    <img src="./media/s_shape_animation.gif" width="50%" height="50%"/>
 </p>
 
 ## Options
@@ -23,18 +23,18 @@ This repository allows learning dynamical systems of multiple dimensions and ord
 
 ### First-order 2-dimensional dynamical systems
 <p float="left">
-  <img src="./media/1st_order_2D.png" width="20%" height="20%"/>
-  <img src="./media/1st_order_2D_diffeo.png" width="20%" height="20%"/> 
+  <img src="./media/1st_order_2D.png" width="40%" height="40%"/>
+  <img src="./media/1st_order_2D_diffeo.png" width="40%" height="40%"/> 
 </p>
 
 ### Second-order 2-dimensional dynamical systems
-<img src="./media/2nd_order_2D.png" width="20%" height="20%"/>
+<img src="./media/2nd_order_2D.png" width="40%" height="40%"/>
 
 ### First-order 3-dimensional dynamical systems
-<img src="./media/1st_order_3D.png" width="30%" height="30%"/>
+<img src="./media/1st_order_3D.png" width="60%" height="60%"/>
 
 ### 1-order N-dimensional dynamical systems
-<img src="./media/1st_order_ND.png" width="17%" height="17%"/>
+<img src="./media/1st_order_ND.png" width="35%" height="35%"/>
 
 ## Robot Experiments
 This repository contains simulated experiments; however, this framework has also been tested using a KUKA LBR iiwa robot manipulator. These results are shown in https://youtu.be/OM-2edHBRfc.
