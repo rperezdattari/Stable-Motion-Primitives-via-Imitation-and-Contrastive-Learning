@@ -26,7 +26,6 @@ class NeuralNetwork(torch.nn.Module):
         # Select activation function
         self.activation = torch.nn.GELU()
         self.sigmoid = torch.nn.Sigmoid()
-        self.tanh = torch.nn.Tanh()
 
         # Initialize goals list
         self.goals_latent_space = list(np.zeros(n_primitives))

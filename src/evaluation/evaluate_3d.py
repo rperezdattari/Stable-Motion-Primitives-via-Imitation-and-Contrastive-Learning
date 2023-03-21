@@ -33,7 +33,7 @@ class Evaluate3D(Evaluate):
         for i in range(self.n_trajectories):
             # Plot datasets
             marker_data_demos = go.Scatter3d(
-                x=self.demonstrations_eval[i][2],
+                x=self.demonstrations_eval[i][2],  # TODO: match corresponding axes using a parameter
                 y=self.demonstrations_eval[i][0],
                 z=self.demonstrations_eval[i][1],
                 marker=go.scatter3d.Marker(size=3, color='red'),

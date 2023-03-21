@@ -78,10 +78,15 @@ class ContrastiveImitation:
         # Initialize latent goals
         self.model.update_goals_latent_space(self.goals_tensor)
 
-    def init_dynamical_system(self, initial_states, primitive_type, delta_t=1):
+    def init_dynamical_system(self, initial_states, primitive_type=None, delta_t=1):
         """
         Creates dynamical system using the parameters/variables of the learning policy
         """
+        # If no primitive type, assume single-model learning
+        if primitive_type is None:
+            primitive_type = torch.FloatTensor([1])
+
+        # Create dynamical system
         dynamical_system = DynamicalSystem(x_init=initial_states,
                                            model=self.model,
                                            primitive_type=primitive_type,
@@ -183,7 +188,7 @@ class ContrastiveImitation:
         state_sample = torch.empty([self.batch_size, self.dim_state, self.imitation_window_size]).cuda()
 
         # Fill first elements of the state with position
-        state_sample[:, :self.dim_workspace, :] = position_sample
+        state_sample[:, :self.dim_workspace, :] = position_sample[:, :, (self.dynamical_system_order - 1):]
 
         # Fill rest of the elements with velocities for second order systems
         if self.dynamical_system_order == 2:

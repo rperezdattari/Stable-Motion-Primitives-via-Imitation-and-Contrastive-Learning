@@ -51,8 +51,8 @@ class Params:
     evaluation_interval: int = 1000  # interval between training iterations to evaluate model
     quanti_eval: bool = True  # quantitative evaluation
     quali_eval: bool = True  # qualitative evaluation
-    diffeo_quanti_eval: bool = True  # quantitative evaluation of diffeomorphism mismatch
-    diffeo_quali_eval: bool = True  # qualitative evaluation of diffeomorphism mismatch
+    diffeo_quanti_eval: bool = False  # quantitative evaluation of diffeomorphism mismatch
+    diffeo_quali_eval: bool = False  # qualitative evaluation of diffeomorphism mismatch
     ignore_n_spurious: bool = False  # when selecting best model, true to ignore amount of spurious attractors
     fixed_point_iteration_thr = 10  # distance threshold to consider that a point did not reach the goal
     density: int = 10  # density^workspace_dimension = amount of points sampled from state space for evaluation

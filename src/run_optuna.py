@@ -40,7 +40,7 @@ def train(trial):
         raise optuna.exceptions.TrialPruned()
 
     # Initialize training
-    learner, evaluator = initialize_framework(params, args.params)
+    learner, evaluator, _ = initialize_framework(params, args.params)
 
     # Start tensorboard writer
     if params.save_evaluation and not args.hyperparameter_optimization:

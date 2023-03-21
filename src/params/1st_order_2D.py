@@ -4,10 +4,10 @@ from dataclasses import dataclass
 @dataclass
 class Params:
     """ General parameters """
-    dataset_name: str = 'LASA'  # options: LASA, LAIR, optitrack, interpolation, joint_space
+    dataset_name: str = 'LASA'  # selects dataset, options: LASA, LAIR, optitrack, interpolation, joint_space
     results_path: str = 'results/1st_order_2D/'
     multi_motion: bool = False  # true when learning multiple motions together
-    selected_primitives_ids: str = '4'  # id number from dataset_keys.py, e.g., '2' or '4,0,6'
+    selected_primitives_ids: str = '25'  # id number from dataset_keys.py, e.g., '2' or '4,0,6'
     workspace_dimensions: int = 2  # dimensionality of the data
     saturate_out_of_boundaries_transitions: bool = True  # True to enforce positively invariant set
     dynamical_system_order: int = 1  # options: 1, 2

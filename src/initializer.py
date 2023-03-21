@@ -37,7 +37,7 @@ def initialize_framework(params, name_params, verbose=True):
         print('\n')
         time.sleep(3)
 
-    return learner, evaluator
+    return learner, evaluator, data
 
 
 def create_directories(results_path):

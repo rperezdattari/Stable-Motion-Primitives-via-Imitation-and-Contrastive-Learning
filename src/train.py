@@ -5,7 +5,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 # Get arguments
 parser = ArgumentParser()
-parser.add_argument('--params', type=str, default='1st_order_multi', help='')
+parser.add_argument('--params', type=str, default='2nd_order_2D', help='')
 parser.add_argument('--results-base-directory', type=str, default='./', help='')
 args = parser.parse_args()
 
@@ -15,7 +15,7 @@ params = Params(args.results_base_directory)
 params.results_path += params.selected_primitives_ids + '/'
 
 # Initialize training objects
-learner, evaluator = initialize_framework(params, args.params)
+learner, evaluator, _ = initialize_framework(params, args.params)
 
 # Start tensorboard writer
 log_name = args.params + '_' + params.selected_primitives_ids

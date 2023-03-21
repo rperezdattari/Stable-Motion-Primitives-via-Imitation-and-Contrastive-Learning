@@ -71,11 +71,10 @@ class TrajectoryPlotter():
         D = self.Xinit.shape[-1]
 
         # Plot it
-        colors = ['blue', 'magenta', 'purple']
         self._plots = [np.nan for _ in range(self.Xinit.shape[-1])]
         for i in range(D):
-            self._plots[i] = [self._ax.plot(self.Xinit[0, i], self.Xinit[1, i], 'o', color=colors[i], markersize=10)[0]]
-            self._plots[i] += [self._ax.plot([], [], color=colors[i], linewidth=2.5)[0]]
+            self._plots[i] = [self._ax.plot(self.Xinit[0, i], self.Xinit[1, i], 'o', color='C'+str(i), markersize=10)[0]]
+            self._plots[i] += [self._ax.plot([], [], color='C'+str(i), linewidth=2.5)[0]]
 
         # Show attractor
         self.targ, = self._ax.plot(self.goal[0], self.goal[1], 'g*', markersize=15, linewidth=3, label='Target')
