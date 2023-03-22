@@ -33,7 +33,7 @@ This repository allows learning dynamical systems of multiple dimensions and ord
 ### First-order 3-dimensional dynamical systems
 <img src="./media/1st_order_3D.png" width="60%" height="60%"/>
 
-### 1-order N-dimensional dynamical systems
+### First-order N-dimensional dynamical systems
 <img src="./media/1st_order_ND.png" width="35%" height="35%"/>
 
 ## Robot Experiments
