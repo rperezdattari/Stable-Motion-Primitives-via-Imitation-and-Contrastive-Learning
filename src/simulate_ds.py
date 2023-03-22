@@ -29,8 +29,6 @@ dynamical_system = learner.init_dynamical_system(initial_states=torch.FloatTenso
 fig, ax = plt.subplots()
 fig.set_size_inches(8, 8)
 fig.show()
-import time
-time.sleep(10)
 trajectory_plotter = TrajectoryPlotter(fig, x0=x_t_init.T, pause_time=1e-5, goal=data['goals training'][0])
 
 # Simulate dynamical system and plot
