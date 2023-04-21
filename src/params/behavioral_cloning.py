@@ -41,6 +41,7 @@ class Params:
     max_iterations: int = 41000  # maximum number of training iterations
 
     """ Preprocessing """
+    spline_sample_type: str = 'from data'  # resample from spline type, options: from data, evenly spaced
     workspace_boundaries_type: str = 'from data'  # options: from data, custom
     workspace_boundaries: str = 'not used'  # list to provide boundaries when workspace_boundaries_type = custom
     trajectories_resample_length: int = 2000  # amount of points resampled from splines

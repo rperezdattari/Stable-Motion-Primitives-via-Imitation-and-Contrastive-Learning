@@ -19,6 +19,7 @@ class DataPreprocessor:
         self.eval_length = params.evaluation_samples_length
         self.dataset_name = params.dataset_name
         self.selected_primitives_id = params.selected_primitives_ids
+        self.spline_sample_type = params.spline_sample_type
 
         self.delta_t = 1  # this value is for learning, so it can be anything
         self.imitation_window_size = params.imitation_window_size  # window size used for imitation cost
@@ -216,7 +217,12 @@ class DataPreprocessor:
             spline_parameters, u = splprep(spline_input, s=0, k=1, u=curve_phases)  # s = 0 -> no smoothing; k = 1 -> linear interpolation
 
             # Create initial phases u with spatially equidistant points
-            u = np.linspace(0, max_phase, self.trajectories_resample_length)
+            if self.spline_sample_type == 'evenly spaced':
+                u = np.linspace(0, max_phase, self.trajectories_resample_length)
+            elif self.spline_sample_type == 'from data':
+                u = curve_phases
+            else:
+                raise NameError('Spline sample type not valid, check params file for options.')
 
             # Iterate using imitation window size to get position labels for backpropagation through time
             window = []

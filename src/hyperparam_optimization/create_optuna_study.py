@@ -3,15 +3,15 @@ Authors:
     Rodrigo Perez-Dattari <r.j.perezdattari@tudelft.nl>
 """
 import optuna
-import os
-os.chdir('../')
+import sys
+sys.path.append('.')
 
 # Get arguments
 from simple_parsing import ArgumentParser
 parser = ArgumentParser()
 parser.add_argument('--params', type=str, default='2nd_order_outer', help='')
 parser.add_argument('--train-dataset', type=bool, default=False, help='')
-parser.add_argument('--hyperparameter-optimization', type=bool, default=True, help='')
+parser.add_argument('--hyperparameter-optimization', type=bool, default=False, help='')
 parser.add_argument('--results-base-directory', type=str, default='./', help='')
 args = parser.parse_args()
 
@@ -44,15 +44,13 @@ study = optuna.create_study(study_name=study_name,
 
 if task == 'optimize':  # add initial guess of parameters of hyperparameter optimization
     initial_guess = {'learning rate': params.learning_rate,
-                     'stabilization loss weight': params.stabilization_loss_weight,
-                     'imitation window size': params.imitation_window_size,
-                     'stabilization window size': params.stabilization_window_size,
-                     'contrastive_margin': params.contrastive_margin}
+                     'imitation window size': params.imitation_window_size}
 
-    if params.adaptive_gains:
-        initial_guess['latent gain upper limit'] = params.latent_gain_upper_limit
-    else:
-        initial_guess['latent gain'] = params.latent_gain
+    if params.stabilization_loss_weight > 0:
+        initial_guess.update({'stabilization loss weight': params.stabilization_loss_weight,
+                              'stabilization window size': params.stabilization_window_size,
+                              'contrastive_margin': params.contrastive_margin,
+                              'latent gain upper limit': params.latent_gain_upper_limit})
 
     # Add guess to study
     study.enqueue_trial(initial_guess)

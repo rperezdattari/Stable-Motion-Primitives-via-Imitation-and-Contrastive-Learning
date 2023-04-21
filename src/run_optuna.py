@@ -11,7 +11,7 @@ import os
 parser = ArgumentParser()
 parser.add_argument('--params', type=str, default='1st_order_2D', help='')
 parser.add_argument('--train-dataset', type=bool, default=False, help='')
-parser.add_argument('--hyperparameter-optimization', type=bool, default=True, help='')
+parser.add_argument('--hyperparameter-optimization', type=bool, default=False, help='')
 parser.add_argument('--results-base-directory', type=str, default='./', help='')
 args = parser.parse_args()
 

@@ -25,7 +25,12 @@ class ContrastiveImitation:
         self.stabilization_loss_weight = params.stabilization_loss_weight
         self.load_model = params.load_model
         self.results_path = params.results_path
-        self.resample_length = params.trajectories_resample_length
+        if params.spline_sample_type == 'evenly spaced':
+            self.resample_length = params.trajectories_resample_length
+        elif params.spline_sample_type == 'from data':
+            self.resample_length = data['demonstrations length'][0]  # TODO: only works if all demos have the same length
+        else:
+            raise NameError('Spline sample type not valid, check params file for options.')
         self.interpolation_sigma = params.interpolation_sigma
         self.delta_t = 1  # used for training, can be anything
 
