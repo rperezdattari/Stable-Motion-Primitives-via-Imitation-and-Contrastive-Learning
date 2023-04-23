@@ -40,6 +40,7 @@ class ContrastiveImitation:
         self.goals_tensor = torch.FloatTensor(data['goals training']).cuda()
         self.demonstrations_train = data['demonstrations train']
         self.n_demonstrations = data['n demonstrations']
+        self.demonstrations_length = data['demonstrations length']
         self.min_vel = torch.from_numpy(data['vel min train'].reshape([1, self.dim_workspace])).float().cuda()
         self.max_vel = torch.from_numpy(data['vel max train'].reshape([1, self.dim_workspace])).float().cuda()
         min_acc = torch.from_numpy(data['acc min train'].reshape([1, self.dim_workspace])).float().cuda()
@@ -143,11 +144,10 @@ class ContrastiveImitation:
         # Compute cost over trajectory
         contrastive_matching_cost = 0
         batch_size = state_sample.shape[0]
-        y_t_task = None
 
         for i in range(self.generalization_window_size):
             # Do transition
-            y_t_task_prev = y_t_task
+            y_t_task_prev = dynamical_system_task.y_t['task']
             y_t_task = dynamical_system_task.transition(space='task')['latent state']
             _, y_t_latent = dynamical_system_latent.transition_latent_system()
 
@@ -183,7 +183,10 @@ class ContrastiveImitation:
         selected_demos = np.random.choice(range(self.n_demonstrations), self.batch_size)
 
         # Get random points inside trajectories
-        i_samples = np.random.randint(0, self.resample_length, self.batch_size, dtype=int)
+        i_samples = []
+        for i in range(self.n_demonstrations):
+            selected_demo_batch_size = sum(selected_demos == i)
+            i_samples = i_samples + list(np.random.randint(0, self.demonstrations_length[i], selected_demo_batch_size, dtype=int))
 
         # Get sampled positions from training data
         position_sample = self.demonstrations_train[selected_demos, i_samples]

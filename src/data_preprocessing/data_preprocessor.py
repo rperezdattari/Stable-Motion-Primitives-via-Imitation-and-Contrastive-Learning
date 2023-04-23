@@ -170,13 +170,20 @@ class DataPreprocessor:
         n_trajectories = len(demonstrations_raw)
         resampled_positions, error_acc = [], []
 
+        # Pad demonstrations
+        demonstrations_raw_padded = []
+        for i in range(features_demos['n demonstrations']):
+            padding_length = features_demos['max demonstration length'] - features_demos['demonstrations length'][i]
+            demonstrations_raw_padded.append(np.pad(demonstrations_raw[i], ((0, 0), (0, padding_length)), mode='edge'))
+        demonstrations_raw_padded = np.array(demonstrations_raw_padded)
+
         # Iterate through each demonstration
         for j in range(n_trajectories):
             if self.verbose:
                 print('Data preprocessing, demonstration %i / %i' % (j + 1, n_trajectories))
 
             # Get current trajectory
-            demo = np.array(demonstrations_raw[j]).T
+            demo = np.array(demonstrations_raw_padded[j]).T
             length_demo = demo.shape[0]
 
             # Normalize demos

@@ -29,6 +29,7 @@ class DynamicalSystem():
 
         # Init dynamical system state
         self.x_t_d = x_init
+        self.y_t = {'task': None, 'latent': None}
         self.y_t_d = self.get_latent_state(x_init)
 
     def get_latent_state(self, x_t=None, space='task'):
@@ -38,9 +39,11 @@ class DynamicalSystem():
         if space == 'task':
             # Map state to latent state (psi)
             y_t = self.model.encoder(x_t, self.primitive_type)
+            self.y_t['task'] = y_t
         elif space == 'latent':
             # Transition following f^{L}
             _, y_t = self.transition_latent_system()
+            self.y_t['latent'] = y_t
         else:
             raise ValueError('Selected transition space not valid, options: task, latent.')
 

@@ -22,7 +22,7 @@ class Params:
     latent_space_dim: int = 300  # dimensionality latent space
     neurons_hidden_layers: int = 300  # number of neurons per layer
     batch_size: int = 250  # sampling batch size
-    learning_rate: float = 0.00059  # AdamW learning rate
+    learning_rate: float = 0.00049  # AdamW learning rate
     weight_decay: float = 0.0001  # AdamW weight decay
 
     """ Contrastive Imitation """
