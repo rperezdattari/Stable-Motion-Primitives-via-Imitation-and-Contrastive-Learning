@@ -255,8 +255,8 @@ class DataPreprocessor:
                 u = np.clip(next_t, a_min=0, a_max=max_phase)  # update phase
 
                 # Accumulate error for debugging
-                predicted_time = splev(u, spline_parameters)[-2]
-                error_acc.append(np.mean(np.abs(predicted_time - u)))
+                predicted_phase = splev(u, spline_parameters)[-2]
+                error_acc.append(np.mean(np.abs(predicted_phase - u)))
 
             resampled_positions.append(window)
 
