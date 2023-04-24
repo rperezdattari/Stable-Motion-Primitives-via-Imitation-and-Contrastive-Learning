@@ -42,7 +42,7 @@ class Params:
     max_iterations: int = 41000  # maximum number of training iterations
 
     """ Preprocessing """
-    spline_sample_type: str = 'evenly spaced'  # resample from spline type, options: from data, evenly spaced
+    spline_sample_type: str = 'from data'  # resample from spline type, options: from data, from data resample, evenly spaced
     workspace_boundaries_type: str = 'custom'  # options: from data, custom
     workspace_boundaries: np.ndarray = np.array([[-2.97, 2.97],
                                                  [-2.09, 2.09],
@@ -50,7 +50,7 @@ class Params:
                                                  [-2.09, 2.09],
                                                  [-2.97, 2.97],
                                                  [-2.09, 2.09]])  # list to provide boundaries when custom boundaries
-    trajectories_resample_length: int = 2000  # amount of points resampled from splines
+    trajectories_resample_length: int = 2000  # amount of points resampled from splines when type spline_sample_type is 'from data resample' or 'evenly spaced'
     state_increment: float = 0.3  # when workspace_boundaries_type = from data, percentage to increment state-space size
 
     """ Evaluation """

@@ -7,7 +7,7 @@ class Params:
     dataset_name: str = 'LASA'  # options: LASA, LAIR, optitrack, interpolation, joint_space
     results_path: str = 'results/1st_order_2D_triplet/'
     multi_motion: bool = False  # true when learning multiple motions together
-    selected_primitives_ids: str = '4'  # id number from dataset_keys.py, e.g., '2' or '4,0,6'
+    selected_primitives_ids: str = '25'  # id number from dataset_keys.py, e.g., '2' or '4,0,6'
     workspace_dimensions: int = 2  # dimensionality of the data
     saturate_out_of_boundaries_transitions: bool = True  # True to enforce positively invariant set
     dynamical_system_order: int = 1  # options: 1, 2
@@ -41,10 +41,10 @@ class Params:
     max_iterations: int = 41000  # maximum number of training iterations
 
     """ Preprocessing """
-    spline_sample_type: str = 'from data'  # resample from spline type, options: from data, evenly spaced
+    spline_sample_type: str = 'from data'  # resample from spline type, options: from data, from data resample, evenly spaced
     workspace_boundaries_type: str = 'from data'  # options: from data, custom
     workspace_boundaries: str = 'not used'  # list to provide boundaries when workspace_boundaries_type = custom
-    trajectories_resample_length: int = 2000  # amount of points resampled from splines
+    trajectories_resample_length: int = 2000  # amount of points resampled from splines when type spline_sample_type is 'from data resample' or 'evenly spaced'
     state_increment: float = 0.3  # when workspace_boundaries_type = from data, percentage to increment state-space size
 
     """ Evaluation """

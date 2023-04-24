@@ -22,7 +22,7 @@ class Params:
     latent_space_dim: int = 300  # dimensionality latent space
     neurons_hidden_layers: int = 300  # number of neurons per layer
     batch_size: int = 250  # sampling batch size
-    learning_rate: float = 0.00049  # AdamW learning rate
+    learning_rate: float = 0.00059  # AdamW learning rate
     weight_decay: float = 0.0001  # AdamW weight decay
 
     """ Contrastive Imitation """
@@ -41,10 +41,10 @@ class Params:
     max_iterations: int = 41000  # maximum number of training iterations
 
     """ Preprocessing """
-    spline_sample_type: str = 'from data'  # resample from spline type, options: from data, evenly spaced
+    spline_sample_type: str = 'from data'  # resample from spline type, options: from data, from data resample, evenly spaced
     workspace_boundaries_type: str = 'from data'  # options: from data, custom
     workspace_boundaries: str = 'not used'  # list to provide boundaries when workspace_boundaries_type = custom
-    trajectories_resample_length: int = 2000  # amount of points resampled from splines
+    trajectories_resample_length: int = 2000  # amount of points resampled from splines when type spline_sample_type is 'from data resample' or 'evenly spaced'
     state_increment: float = 0.3  # when workspace_boundaries_type = from data, percentage to increment state-space size
 
     """ Evaluation """

@@ -189,29 +189,37 @@ class DataPreprocessor:
             # Normalize demos
             demo_norm = normalize_state(demo, x_min=features_demos['x min'], x_max=features_demos['x max'])
 
-            # Create phase array that spatially parametrizes demo in one dimension
-            curve_phase = 0
-            curve_phases, delta_phases = [curve_phase], []
+            if self.spline_sample_type == 'evenly spaced':
+                # Create phase array that spatially parametrizes demo in one dimension
+                curve_phase = 0
+                curve_phases, delta_phases = [curve_phase], []
 
-            for i in range(length_demo - 1):  # iterate through every point in trajectory and assign a phase value
-                # Compute phase increment based on distance of consecutive points
-                delta_phase = np.linalg.norm(demo_norm[i + 1, :] - demo_norm[i, :])
+                for i in range(length_demo - 1):  # iterate through every point in trajectory and assign a phase value
+                    # Compute phase increment based on distance of consecutive points
+                    delta_phase = np.linalg.norm(demo_norm[i + 1, :] - demo_norm[i, :])
 
-                if delta_phase == 0:
-                    # If points in trajectory have zero phase difference, splprep throws error -> add small margin
-                    delta_phase += 1e-15
+                    if delta_phase == 0:
+                        # If points in trajectory have zero phase difference, splprep throws error -> add small margin
+                        delta_phase += 1e-15
 
-                # Increment phase
-                curve_phase += delta_phase
+                    # Increment phase
+                    curve_phase += delta_phase
 
-                # Store phase and delta of current point in curve
-                curve_phases.append(curve_phase)
-                delta_phases.append(delta_phase)
+                    # Store phase and delta of current point in curve
+                    curve_phases.append(curve_phase)
+                    delta_phases.append(delta_phase)
 
-            delta_phases.append(0)  # zero delta for last point
-            curve_phases = np.array(curve_phases)
-            delta_phases = np.array(delta_phases)
-            max_phase = curve_phases[-1]
+                delta_phases.append(0)  # zero delta for last point
+                curve_phases = np.array(curve_phases)
+                delta_phases = np.array(delta_phases)
+                max_phase = curve_phases[-1]
+
+            elif self.spline_sample_type == 'from data' or self.spline_sample_type == 'from data resample':
+                curve_phases = np.arange(0, length_demo * self.delta_t, self.delta_t)
+                delta_phases = np.ones(length_demo) * self.delta_t  # TODO: could be extended to variable delta t
+                max_phase = np.max(curve_phases)
+            else:
+                raise NameError('Spline sample type not valid, check params file for options.')
 
             # Create input for spline: demonstrations and corresponding phases
             spline_input = []
@@ -221,10 +229,10 @@ class DataPreprocessor:
             spline_input.append(delta_phases)
 
             # Fit spline
-            spline_parameters, u = splprep(spline_input, s=0, k=1, u=curve_phases)  # s = 0 -> no smoothing; k = 1 -> linear interpolation
+            spline_parameters, _ = splprep(spline_input, s=0, k=1, u=curve_phases)  # s = 0 -> no smoothing; k = 1 -> linear interpolation
 
             # Create initial phases u with spatially equidistant points
-            if self.spline_sample_type == 'evenly spaced':
+            if self.spline_sample_type == 'evenly spaced' or self.spline_sample_type == 'from data resample':
                 u = np.linspace(0, max_phase, self.trajectories_resample_length)
             elif self.spline_sample_type == 'from data':
                 u = curve_phases
@@ -241,14 +249,14 @@ class DataPreprocessor:
                 # Append position to window trajectory
                 window.append(position_window)
 
-                # Find phase for next point in imitation window
+                # Find time/phase for next point in imitation window
                 delta_phase = spline_values[-1]
-                next_phase = u + delta_phase
-                u = np.clip(next_phase, a_min=0, a_max=max_phase)  # update phase
+                next_t = u + delta_phase
+                u = np.clip(next_t, a_min=0, a_max=max_phase)  # update phase
 
                 # Accumulate error for debugging
-                predicted_phase = splev(u, spline_parameters)[-2]
-                error_acc.append(np.mean(np.abs(predicted_phase - next_phase)))
+                predicted_time = splev(u, spline_parameters)[-2]
+                error_acc.append(np.mean(np.abs(predicted_time - u)))
 
             resampled_positions.append(window)
 
