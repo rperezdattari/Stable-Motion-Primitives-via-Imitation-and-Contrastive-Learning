@@ -28,17 +28,17 @@ def denormalize_state(state, x_min, x_max):
     return state
 
 
-def denormalize_dx(dx_t, max_state_derivative):
+def denormalize_derivative(dx_t, max_state_derivative):
     """
-    Denormalize velocity
+    Denormalize state derivative
     """
     dx_t_denormalized = dx_t * max_state_derivative
     return dx_t_denormalized
 
 
-def normalize_dx(dx_t, max_state_derivative):
+def normalize_derivative(dx_t, max_state_derivative):
     """
-    Normalize velocity
+    Normalize state derivative
     """
     dx_t_normalized = dx_t / max_state_derivative
     return dx_t_normalized

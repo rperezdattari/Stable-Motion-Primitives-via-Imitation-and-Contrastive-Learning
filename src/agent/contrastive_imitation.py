@@ -180,7 +180,8 @@ class ContrastiveImitation:
         i_samples = []
         for i in range(self.n_demonstrations):
             selected_demo_batch_size = sum(selected_demos == i)
-            i_samples = i_samples + list(np.random.randint(0, self.demonstrations_length[i], selected_demo_batch_size, dtype=int))
+            demonstration_length = self.demonstrations_train.shape[1]
+            i_samples = i_samples + list(np.random.randint(0, demonstration_length, selected_demo_batch_size, dtype=int))
 
         # Get sampled positions from training data
         position_sample = self.demonstrations_train[selected_demos, i_samples]

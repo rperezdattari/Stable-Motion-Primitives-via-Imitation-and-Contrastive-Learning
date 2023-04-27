@@ -15,23 +15,23 @@ class Params:
     """ Latent Dynamical System parameters """
     adaptive_gains: bool = True  # adaptive gains if true
     latent_gain_lower_limit: float = 0  # adaptive gains lower limit (always zero in paper)
-    latent_gain_upper_limit: float = 0.8  # adaptive gains upper limit
+    latent_gain_upper_limit: float = 0.4872  # adaptive gains upper limit
     latent_gain: float = 0.008  # value of gains when fixed
 
     """ Neural Network """
     latent_space_dim: int = 300  # dimensionality latent space
     neurons_hidden_layers: int = 300  # number of neurons per layer
     batch_size: int = 250  # sampling batch size
-    learning_rate: float = 0.00013  # AdamW learning rate
+    learning_rate: float = 0.000148  # AdamW learning rate
     weight_decay: float = 0.0  # AdamW weight decay
 
     """ Contrastive Imitation """
     imitation_loss_weight: int = 1  # imitation loss weight
-    stabilization_loss_weight: int = 1  # stability loss weight
+    stabilization_loss_weight: int = 2.982  # stability loss weight
     imitation_window_size: int = 15  # imitation window size
     stabilization_window_size: int = 12  # stability window size
     stabilization_loss: str = 'contrastive'  # options: contrastive, triplet
-    contrastive_margin: float = 0.00014  # contrastive loss margin
+    contrastive_margin: float = 3.77322e-7  # contrastive loss margin
     triplet_margin: float = 1e-4  # triplet loss margin
     interpolation_sigma: float = 0.8  # percentage of points sampled in demonstrations space when multi-model learning
 
