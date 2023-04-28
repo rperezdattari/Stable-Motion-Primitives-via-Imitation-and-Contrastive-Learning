@@ -295,8 +295,8 @@ class Evaluate():
         """
         # Get RMSE between task space and latent space trajectory
         length_demonstrations = self.demonstrations_eval[0][0].shape[0]
-        visited_positions_denormalized = denormalize_state(sim_results['visited states grid'][:length_demonstrations, :, :], self.x_min, self.x_max)
-        visited_positions_latent_denormalized = denormalize_state(sim_results_latent['visited states grid'][:length_demonstrations, :, :], self.x_min, self.x_max)
+        visited_positions_denormalized = denormalize_state(sim_results['visited states grid'][:length_demonstrations, :, :self.dim_workspace], self.x_min, self.x_max)
+        visited_positions_latent_denormalized = denormalize_state(sim_results_latent['visited states grid'][:length_demonstrations, :, :self.dim_workspace], self.x_min, self.x_max)
         RMSE_trajectory_comparison = get_RMSE(visited_positions_denormalized, visited_positions_latent_denormalized, verbose=False)
 
         # Compute mean

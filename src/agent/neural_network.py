@@ -165,6 +165,9 @@ class NeuralNetwork(torch.nn.Module):
         # Get latent goals batch
         y_goal = self.get_goals_latent_space_batch(primitive_type)
 
+        # With bad hyperparams y value can explode when simulating the system, creating nans -> clamp to avoid issues when hyperparam tuning
+        y_t = torch.clamp(y_t, min=-3e18, max=3e18)
+
         # Normalize y_t
         y_t_norm = self.norm_latent_gain_input(y_t)
 
