@@ -37,8 +37,12 @@ class ContrastiveImitation:
         self.demonstrations_length = data['demonstrations length']
         self.min_vel = torch.from_numpy(data['vel min train'].reshape([1, self.dim_workspace])).float().cuda()
         self.max_vel = torch.from_numpy(data['vel max train'].reshape([1, self.dim_workspace])).float().cuda()
-        min_acc = torch.from_numpy(data['acc min train'].reshape([1, self.dim_workspace])).float().cuda()
-        max_acc = torch.from_numpy(data['acc max train'].reshape([1, self.dim_workspace])).float().cuda()
+        if data['acc min train'] is not None:
+            min_acc = torch.from_numpy(data['acc min train'].reshape([1, self.dim_workspace])).float().cuda()
+            max_acc = torch.from_numpy(data['acc max train'].reshape([1, self.dim_workspace])).float().cuda()
+        else:
+            min_acc = None
+            max_acc = None
 
         # Dynamical-system-only params
         self.params_dynamical_system = {'saturate transition': params.saturate_out_of_boundaries_transitions,

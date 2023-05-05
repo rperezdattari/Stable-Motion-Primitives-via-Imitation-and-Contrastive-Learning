@@ -23,7 +23,8 @@ class DynamicalSystem():
         self.max_vel_norm = torch.max(-self.min_vel, self.max_vel)  # axes are treated independently
         self.min_acc = min_state_derivative[1]
         self.max_acc = max_state_derivative[1]
-        self.max_acc_norm = torch.max(-self.min_acc, self.max_acc)  # axes are treated independently
+        if self.min_acc is not None:
+            self.max_acc_norm = torch.max(-self.min_acc, self.max_acc)  # axes are treated independently
         self.delta_t = delta_t
         self.x_min = np.array(x_min)
         self.x_max = np.array(x_max)
