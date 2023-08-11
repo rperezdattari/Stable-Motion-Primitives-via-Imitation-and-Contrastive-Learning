@@ -1,7 +1,7 @@
 # Stable Motion Primitives via Imitation and Contrastive Learning
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 
-Code accompanying the paper: "Stable Motion Primitives via Imitation and Contrastive Learning" (under review, submitted to T-RO).
+Code accompanying the paper: "Stable Motion Primitives via Imitation and Contrastive Learning" (T-RO).
 For details, please refer to https://arxiv.org/pdf/2302.10017.pdf. 
 
 The current version of the paper can be cited using the following reference:
