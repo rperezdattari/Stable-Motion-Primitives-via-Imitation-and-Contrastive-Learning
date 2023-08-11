@@ -6,11 +6,18 @@ For details, please refer to https://arxiv.org/pdf/2302.10017.pdf.
 
 The current version of the paper can be cited using the following reference:
 ```bibtex
-@article{perez2023stable,
+@article{PerezDattari2023TRO,
+  author  = {P\'{e}rez-Dattari, Rodrigo AND Kober, Jens},
+  journal = {IEEE Transactions on Robotics},
   title   = {Stable Motion Primitives via Imitation and Contrastive Learning},
-  author  = {P{\'e}rez-Dattari, Rodrigo and Kober, Jens},
-  journal = {arXiv preprint arXiv:2302.10017},
-  year    = {2023}
+  year    = {2023},
+  pages   = {1--20},
+  doi     = {10.1109/TRO.2023.3289597},
+  code    = {https://github.com/rperezdattari/Stable-Motion-Primitives-via-Imitation-and-Contrastive-Learning},
+  file    = {https://arxiv.org/pdf/2302.10017.pdf},
+  project = {FlexCRAFT},
+  video   = {https://youtu.be/OM-2edHBRfc},
+  oa      = {green},
 }
 ```
 ## Teaser: executing learned motion for multiple initial conditions
